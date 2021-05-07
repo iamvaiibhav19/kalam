@@ -9,15 +9,13 @@ import { Typography, CardContent } from "@material-ui/core";
 import { allStages } from "../config";
 
 const showContact = (student) => {
-
-  let studentStatus = ""
+  let studentStatus = "";
   if (student.status != null) {
-    const status_student = student.status.charAt(0).toUpperCase() + student.status.slice(1)
-    const status = status_student.split(/(?=[A-Z])/)
-    for (var i of status) {
-      studentStatus = studentStatus + i + " "
-    }
-  } 
+    const status_student =
+      student.status.charAt(0).toUpperCase() + student.status.slice(1);
+    const status = status_student.split(/(?=[A-Z])/);
+    studentStatus = status.join(" ");
+  }
 
   return (
     <center>
@@ -25,9 +23,7 @@ const showContact = (student) => {
         {student.name}:{student.mobile}
       </div>
       {student.status != null ? (
-        <span style={{ fontSize: 15,fontWeight: 500 }}>
-          ({studentStatus})
-        </span>
+        <span style={{ fontSize: 15, fontWeight: 500 }}>({studentStatus})</span>
       ) : (
         <span>{student.status}</span>
       )}
