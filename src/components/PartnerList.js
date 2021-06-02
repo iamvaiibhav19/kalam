@@ -44,6 +44,7 @@ const columns = [
       filter: true,
       sort: true,
       customBodyRender: (value, rowMeta) => {
+        console.log(rowMeta, "row");
         let name = rowMeta.rowData[2];
         return (
           <PartnerLink

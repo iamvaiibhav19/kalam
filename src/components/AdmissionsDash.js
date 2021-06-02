@@ -140,6 +140,7 @@ export class AdmissionsDash extends React.Component {
 
   render = () => {
     const { classes, fetchPendingInterviewDetails } = this.props;
+
     const options = (
       <Box>
         <Select
@@ -268,7 +269,6 @@ export class AdmissionsDash extends React.Component {
           },
         });
       }
-
       const studentData = response.data.data.map((student) => {
         return {
           ...student,

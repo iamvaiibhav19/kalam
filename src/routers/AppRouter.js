@@ -19,6 +19,7 @@ import ReportContainer from "../components/ReportContainer";
 import ProgressMadeForPartner from "../components/progressMade";
 import DonorList from "../components/DornorList";
 import CampusList from "../components/CampusList";
+import DonorStudentsData from "../components/DonorStudentsData";
 // if authenticated, redirect to /students else be there
 import PublicRoute from "./PublicRouter";
 // if authenticated be there, else redirect to /login
@@ -40,7 +41,13 @@ const AppRouter = () => (
         />
         <PublicRoute path="/login" component={LoginDesign} exact={true} />
         <PrivateRoute path="/tasks" component={MyTaskReport} />
+
         <PrivateRoute path="/donors" component={DonorList} />
+        <PrivateRoute
+          path="/donor/:donorId/students"
+          component={DonorStudentsData}
+        />
+
         <PrivateRoute path="/campuses" component={CampusList} />
 
         <PrivateRoute

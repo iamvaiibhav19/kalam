@@ -145,7 +145,8 @@ const campusColumn = {
     sort: true,
     display: false,
     customBodyRender: (value, rowMeta, updateValue) => {
-      if (permissions.updateStage.indexOf(rowMeta.rowData[15]) > -1) {
+      let index = rowMeta.rowData[rowMeta.rowData.length - 1];
+      if (permissions.updateStage.indexOf(index) > -1) {
         return (
           <UpdateDonorOrCampus
             allOptions={campus}
@@ -169,7 +170,8 @@ const donorColumn = {
     sort: true,
     display: false,
     customBodyRender: (value, rowMeta, updateValue) => {
-      if (permissions.updateStage.indexOf(rowMeta.rowData[15]) > -1) {
+      let index = rowMeta.rowData[rowMeta.rowData.length - 1];
+      if (permissions.updateStage.indexOf(index) > -1) {
         return (
           <UpdateDonorOrCampus
             allOptions={donor}
@@ -193,7 +195,8 @@ const stageColumn = {
     sort: true,
     filterOptions: allStagesOptions,
     customBodyRender: (value, rowMeta, updateValue) => {
-      if (permissions.updateStage.indexOf(rowMeta.rowData[15]) > -1) {
+      let index = rowMeta.rowData[rowMeta.rowData.length - 1];
+      if (permissions.updateStage.indexOf(index) > -1) {
         return (
           <StageSelect
             allStagesOptions={allStagesOptions}
@@ -515,6 +518,7 @@ const loggedInUser = {
     filter: false,
     display: false,
     customBodyRender: (rowData) => {
+      // console.log(rowData, "rowData");
       if (rowData !== undefined) {
         return rowData.user_name;
       }
@@ -790,7 +794,6 @@ const StudentService = {
       QualificationColumn,
       ReligionColumn,
       CasteColumn,
-      loggedInUserColumn,
       ownerColumnMyreport,
       statusColumn,
       deadlineColumn,
@@ -799,6 +802,7 @@ const StudentService = {
       ageColumn,
       campusColumn,
       donorColumn,
+      loggedInUserColumn,
     ],
     columnTransition: [
       stageColumnTransition,
@@ -844,15 +848,25 @@ const StudentService = {
     TotalUnspecifiedDanglingReport,
     TotalDanglingReport,
   ],
-
+  DonorData: [
+    nameColumn,
+    // cityColumn,
+    // stateColumn,
+    EmailColumn,
+    genderColumn,
+    stageColumn,
+    QualificationColumn,
+    loggedInUserColumn,
+  ],
   dConvert: (x) => {
+    x.gender = x.gender == 1 ? "Female" : "Male";
+
     try {
       x.number = x["contacts"][0]["mobile"];
     } catch (e) {
       x.number = null;
     }
 
-    x.gender = x.gender == 1 ? "Female" : "Male";
     x.stage = allStages[x.stage];
     x.marks = x.enrolmentKey[0]
       ? parseInt(x.enrolmentKey[0].total_marks, 10)
@@ -861,6 +875,7 @@ const StudentService = {
     x.lastUpdated = x.lastTransition ? x.lastTransition.created_at : null;
     x.age = x.dob ? new Date().getFullYear() - +x.dob.slice(0, 4) : "NA";
     x.studentOwner = x.feedbacks ? x.feedbacks.to_assign : x.to_assign;
+
     return x;
   },
 

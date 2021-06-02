@@ -6,15 +6,34 @@ import { Link } from "react-router-dom";
 
 const baseUrl = process.env.API_URL;
 
+const state = [
+  { id: 1, name: "Microsoft", data: "Pune" },
+  { id: 2, name: "KPMG", data: "Bangalore" },
+  { id: 3, name: "Accenture", data: "Dharmshala" },
+];
+
 const columns = [
   {
-    name: "name",
+    name: "id",
+    label: "S.No",
+    options: {
+      filter: true,
+      sort: true,
+      customBodyRender: (value, rowMeta) => {
+        const index = rowMeta.rowIndex + 1;
+        return index;
+      },
+    },
+  },
+  {
+    name: "donor",
     label: "Name",
     options: {
       filter: true,
       sort: true,
-      customBodyRender: (value) => {
-        let url = `/donor/${value}`;
+      customBodyRender: (value, rowMeta) => {
+        const id = rowMeta.rowData[0];
+        let url = `donor/${id}/students`;
         return (
           <Link to={url} style={{ color: "#f05f40" }}>
             {value}
@@ -38,10 +57,10 @@ class DonorList extends Component {
 
   async fetchDonors() {
     try {
-      const dataURL = baseUrl + "Donors";
+      const dataURL = baseUrl + "donor";
       const response = await axios.get(dataURL);
       this.setState({
-        data: response.data.data,
+        data: response.data,
       });
     } catch (e) {
       console.log(e);
