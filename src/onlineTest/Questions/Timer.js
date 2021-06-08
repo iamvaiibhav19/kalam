@@ -8,6 +8,13 @@ function Timer({ expiryTimestamp, isLoggedIn }) {
     onExpire: () => alert("Time Over"),
   });
 
+  // const time = expiryTimestamp.toISOString().substr(11, 8);
+  // console.log("expiryTimestamp", expiryTimestamp)
+
+  // console.log("hours", hours)
+  // console.log("minutes", minutes)
+  // console.log("seconds", seconds)
+
   return (
     <div style={{ textAlign: "center" }}>
       <div>

@@ -12,7 +12,7 @@ const tutorialSteps = {
     "You could not clear the Navgurukul Scholarship Test this time. You have scored ",
   hiContent2: " नंबर आए है| कोई बात नहीं आप दोबारा कोशिश कर सकते हो।",
   enContent2:
-    " marks in the test. Dont't worry, you can give the test again after some preparation",
+    " marks in the test. Don't worry, you can give the test again after some preparation",
   hiContent3:
     "आप थोड़ी और तैयारी के बाद यह टेस्ट फिर से दे सकते है | गणित की प्रैक्टिस के लिए ",
   enContent3: "You can use this study guide for more maths practice ",
@@ -44,12 +44,16 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(3),
     backgroundColor: theme.palette.background.default,
   },
+  // link: {
+  //   color: "primary"
+  // },
 }));
 
-function SorryPage() {
+function SorryPage(props) {
   const classes = useStyles();
 
-  const marks = 1;
+  const marks = props.location.totalScore;
+  console.log("props", props);
 
   return (
     <Container maxWidth="lg" align="center" justifyContent="center">
@@ -74,14 +78,16 @@ function SorryPage() {
         {/* <Paper square elevation={0} className={classes.content}>
           <Typography>
             {tutorialSteps.hiContent3}
-            <a href="https://saral.navgurukul.org/">{tutorialSteps.hiLink}</a>
+            <a href="https://saral.navgurukul.org/" className={classes.link}>{tutorialSteps.hiLink}</a>
             {tutorialSteps.hiContent4}
           </Typography>
         </Paper> */}
         <Paper square elevation={0} className={classes.content}>
           <Typography>
             {tutorialSteps.enContent3}
-            <a href="https://merakilearn.org/">{tutorialSteps.enLink}</a>
+            <a href="https://merakilearn.org/" color="primary">
+              {tutorialSteps.enLink}
+            </a>
             {tutorialSteps.enContent4}
           </Typography>
         </Paper>

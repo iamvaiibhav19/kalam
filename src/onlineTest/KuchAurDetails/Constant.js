@@ -1,5 +1,5 @@
-// modules.export = {
-state: [
+// // modules.export = {
+const state = [
   "Select State",
   "Andaman and Nicobar Islands",
   "Andhra Pradesh",
@@ -37,4 +37,8 @@ state: [
   "Uttarakhand",
   "West Bengal",
 ];
-// };
+// // };
+
+// const state = "Poonam";
+
+export { state };

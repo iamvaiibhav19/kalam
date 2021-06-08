@@ -29,14 +29,11 @@ const tutorialSteps = [
     heading: "NavGurukul Scholarship Test",
     enContent:
       "Yeh test shuru hone se pehle kuch important cheezein padh lein. Yeh cheezein aapko test dene ke time bahot kaam aayengi.",
-    one:
-      "1. Poora test 1 hour ka hoga. Kisi shaant jagah pe jaa ke iss test to dijiye. Isse aap ache se saare saavalon ka javab de payenge.",
-    two:
-      "2. Test dete waqt apne paas ek notebook aur pen rakhein. Aap koi bhi rough work notebook mein kar sakte hain.",
+    one: "1. Poora test 1 hour ka hoga. Kisi shaant jagah pe jaa ke iss test to dijiye. Isse aap ache se saare saavalon ka javab de payenge.",
+    two: "2. Test dete waqt apne paas ek notebook aur pen rakhein. Aap koi bhi rough work notebook mein kar sakte hain.",
     three:
       "3. Har question ka answer apne phone pe hi test dete hue daal dein.",
-    four:
-      "4. Aapko cheating karne ka mauke mil sakte hain, lekin humein aap pe bharosa hai ki aap cheating nahi karenge :)",
+    four: "4. Aapko cheating karne ka mauke mil sakte hain, lekin humein aap pe bharosa hai ki aap cheating nahi karenge :)",
     inputField: false,
     button: "Main tyaar hu",
     button3: false,
@@ -106,11 +103,14 @@ function SlideShow(props) {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
+  localStorage.setItem("enrolmentKey", props.location.enrolmentKey);
+  // const enrolmentKey = localStorage.getItem("enrolmentKey");
+
   const goToForm = () => {
     // console.log("Poonam")
     history.push({
       pathname: "/studentDetails",
-      enrolment_key: props.location.enrolmentKey,
+      // enrolment_key: enrolmentKey,
     });
   };
 
