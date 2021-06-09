@@ -83,6 +83,7 @@ function EkAurBaat(props) {
   console.log("enrolmentKey", enrolmentKey);
 
   const fetchQuestionsAndOptions = () => {
+    localStorage.setItem("answerObj", JSON.stringify(""));
     axios
       .post(`${baseUrl}on_assessment/questions/${enrolmentKey}`)
       .then((res) => {

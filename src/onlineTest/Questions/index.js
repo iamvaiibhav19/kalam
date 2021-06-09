@@ -43,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
 function Questions(props) {
   const classes = useStyles();
   const [index, setIndex] = useState(null);
-  const [answer, setAnswer] = useState("");
   const [answerObj, setAnswerObj] = useState({});
   const [questionId, setQuestionId] = useState("");
 
@@ -58,6 +57,7 @@ function Questions(props) {
 
   useEffect(() => {
     setIndex(JSON.parse(localStorage.getItem("index")));
+    setAnswerObj(JSON.parse(localStorage.getItem("answerObj")));
     // console.log(JSON.parse(localStorage.getItem("index")));
   }, []);
 
@@ -68,13 +68,12 @@ function Questions(props) {
 
   const questionsHasDone = Object.keys(answerObj).length;
 
-  const changeHandler = (e) => {
-    setAnswer(e.target.value);
+  const changeHandler = (e, question_id) => {
+    setAnswerObj({ ...answerObj, [question_id]: e.target.value });
     setQuestionId(e.target.name);
   };
 
   console.log("questionId", questionId);
-  console.log("answer", answer);
 
   const previousClickHandler = () => {
     setIndex(index - 1);
@@ -82,10 +81,7 @@ function Questions(props) {
 
   const nextClickHandler = () => {
     setIndex(index + 1);
-    if (answer) {
-      setAnswerObj({ ...answerObj, [questionId]: answer });
-    }
-    setAnswer("");
+    localStorage.setItem("answerObj", JSON.stringify({ ...answerObj }));
 
     console.log("correctAnswerObj in nextClickHandler ", correctAnswerObj);
 
@@ -124,10 +120,7 @@ function Questions(props) {
     history.push({
       pathname: "/kuchAurDetails",
       enrolment_key: props.location.enrolment_key,
-      totalScore: isEqual(
-        { ...answerObj, [questionId]: answer },
-        correctAnswerObj
-      ),
+      totalScore: isEqual(answerObj, correctAnswerObj),
     });
   };
 
@@ -197,10 +190,10 @@ function Questions(props) {
               className={classes.spacing}
               // label="Your name"
               placeholder="Write your answer here..."
-              value={answer}
+              value={answerObj[question_id] ? answerObj[question_id] : ""}
               name={question_id}
               autoComplete="off"
-              onChange={changeHandler}
+              onChange={(e) => changeHandler(e, question_id)}
             />
 
             {index == 17 ? (
@@ -230,17 +223,19 @@ function Questions(props) {
               </Grid>
             ) : (
               <Grid container spacing={3}>
-                <Grid item xs={6}>
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    onClick={previousClickHandler}
-                  >
-                    Previous
-                  </Button>
-                </Grid>
+                {index > 0 && (
+                  <Grid item xs={6}>
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      onClick={previousClickHandler}
+                    >
+                      Previous
+                    </Button>
+                  </Grid>
+                )}
                 <Grid item xs={6}>
                   <Button
                     type="submit"
