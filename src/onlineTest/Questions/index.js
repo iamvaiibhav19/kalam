@@ -65,9 +65,6 @@ function Questions(props) {
 
   const answerList = props.location.answerList;
   const questionsList = JSON.parse(localStorage.getItem("questionsList"));
-
-  const questionsHasDone = Object.keys(answerObj).length;
-
   const changeHandler = (e, question_id) => {
     setAnswerObj({ ...answerObj, [question_id]: e.target.value });
     setQuestionId(e.target.name);
@@ -151,7 +148,7 @@ function Questions(props) {
           <Paper square elevation={0} className={classes.content}>
             <Typography variant="subtitle1">
               {tutorialSteps.content1}
-              {index + 1} {tutorialSteps.content2} {questionsHasDone}{" "}
+              {index + 1} {tutorialSteps.content2} {index}{" "}
               {tutorialSteps.content3}
             </Typography>
             <Typography variant="subtitle1">
