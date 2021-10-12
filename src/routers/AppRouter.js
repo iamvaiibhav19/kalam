@@ -23,6 +23,7 @@ import CampusList from '../components/CampusList'
 import CampusStudentsData from '../components/CampusStudentsData'
 import PartnerStudentsProgressInCampus from '../components/PartnerStudentsProgressInCampus'
 import OwnerList from '../components/OwnerList'
+import RegistrationForm from '../components/RegistrationForm'
 // if authenticated, redirect to /students else be there
 import PublicRoute from './PublicRouter'
 // if authenticated be there, else redirect to /login
@@ -77,6 +78,10 @@ const AppRouter = () => (
         <AnyRoute
           path='/partner/:partnerId'
           component={ProgressMadeForPartner}
+        />
+          <AnyRoute
+          path='/register'
+          component={RegistrationForm}
         />
         <AnyRoute path='/partnerLanding/:slug' component={LandingPage} />
         <PrivateRoute path='/partners' component={PartnerList} />
